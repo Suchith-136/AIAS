@@ -1,0 +1,8 @@
+# User Data (Anonymized)
+name: ksk
+age: 18
+email: k***@gmail.com
+phone: ***95
+address: 23-8-567
+# Password Hash (for protection)
+password_hash: 82977dfac1b21a70d150167cdfa7082d25946d7a7f3a8f05b3b2e1912105ec0e
