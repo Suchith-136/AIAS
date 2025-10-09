@@ -1,0 +1,291 @@
+<!--
+  portfolio.html
+  Single-file conversion of the React/TypeScript portfolio into plain HTML, CSS, and JS
+  Author: Converted for Kolluri Suchith Kumar
+  Usage: Save as `portfolio.html` and open in a browser. To split into separate files (index.html, styles.css, script.js) tell me and I'll provide those.
+-->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Kolluri Suchith Kumar — Portfolio</title>
+  <meta name="description" content="Portfolio of Kolluri Suchith Kumar — 2nd-year CSE student">
+  <style>
+    /* main.css - embedded */
+    :root{
+      --bg:#0f1724;
+      --card:#0b1220;
+      --muted:#94a3b8;
+      --accent:#6ee7b7;
+      --glass: rgba(255,255,255,0.04);
+      --max-width:1100px;
+      --radius:12px;
+      --gap:1.25rem;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      background:linear-gradient(180deg,#071024 0%, #0b1220 100%);
+      color:#e6eef8;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      padding:2rem 1rem;
+      display:flex;
+      justify-content:center;
+      font-size:16px;
+    }
+    .container{
+      width:100%;
+      max-width:var(--max-width);
+      margin:0 auto;
+    }
+    header{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:1rem;
+      margin-bottom:1.5rem;\    }
+    .brand{
+      display:flex;gap:.75rem;align-items:center
+    }
+    .brand .logo{
+      width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#60a5fa);display:flex;align-items:center;justify-content:center;color:#042027;font-weight:700;font-size:18px
+    }
+    nav a{color:var(--muted);text-decoration:none;margin-left:1rem}
+    nav a:hover{color:var(--accent)}
+
+    main{
+      display:grid;grid-template-columns:1fr;gap:var(--gap);
+    }
+
+    .card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:1.2rem;
+      box-shadow:0 6px 18px rgba(2,6,23,0.6);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+
+    /* Home / Hero */
+    .hero{
+      display:flex;flex-direction:column;gap:1rem;align-items:flex-start;
+    }
+    .hero .title{font-size:clamp(1.4rem,2.8vw,2rem);margin:0}
+    .hero .subtitle{color:var(--muted);margin:0}
+    .typing{color:var(--accent);font-weight:600}
+
+    /* Grid sections */
+    .grid{
+      display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;
+    }
+    @media (max-width:820px){.grid{grid-template-columns:1fr}}
+
+    /* Certifications */
+    .cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1rem}
+    .cert{padding:.8rem;border-radius:10px;background:var(--glass);border:1px solid rgba(255,255,255,0.02)}
+    .cert h4{margin:.25rem 0 .5rem 0}
+    .cert p{margin:0;color:var(--muted);font-size:.92rem}
+
+    /* Skills */
+    .skill{margin-bottom:.8rem}
+    .skill .meta{display:flex;justify-content:space-between;margin-bottom:.25rem;color:var(--muted);font-size:.9rem}
+    .bar{height:10px;background:rgba(255,255,255,0.06);border-radius:999px;overflow:hidden}
+    .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--accent),#60a5fa)}
+
+    /* Projects */
+    .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+    .project{padding:1rem;border-radius:10px;background:linear-gradient(180deg,rgba(255,255,255,0.02),transparent);border:1px solid rgba(255,255,255,0.03)}
+    .project h5{margin:0 0 .5rem 0}
+    .project p{color:var(--muted);margin:0}
+    .btn{display:inline-block;padding:.5rem .75rem;border-radius:8px;background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.04);cursor:pointer}
+    .btn.primary{background:linear-gradient(90deg,var(--accent),#60a5fa);color:#042027;border:none}
+
+    /* Contact */
+    form{display:grid;gap:.75rem}
+    input[type=text],input[type=email],textarea,select{width:100%;padding:.6rem;border-radius:8px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    textarea{min-height:120px;resize:vertical}
+    .muted{color:var(--muted);font-size:.95rem}
+
+    footer{margin-top:1.5rem;text-align:center;color:var(--muted);font-size:.9rem}
+
+    /* small utilities */
+    .row{display:flex;gap:.75rem;align-items:center}
+    .spacer{flex:1}
+    .pill{padding:.35rem .5rem;border-radius:999px;border:1px solid rgba(255,255,255,0.03);background:rgba(255,255,255,0.02)}
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">KS</div>
+        <div>
+          <div style="font-weight:700">Kolluri Suchith Kumar</div>
+          <div class="muted">2nd-year CSE student • SR University</div>
+        </div>
+      </div>
+      <nav aria-label="main navigation">
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main>
+      <!-- Home / Hero -->
+      <section id="home" class="card hero">
+        <h1 class="title">Hi, I'm <span style="color:var(--accent)">Kolluri Suchith Kumar</span></h1>
+        <p class="subtitle">A passionate Computer Science student building things with code. I enjoy problem-solving, web development and learning new technologies.</p>
+        <div class="row">
+          <div class="pill">Role: <span class="typing" id="typing">Web Developer</span></div>
+          <div class="spacer"></div>
+          <a class="btn" href="#projects">View projects</a>
+          <a class="btn primary" href="#contact">Contact me</a>
+        </div>
+      </section>
+
+      <!-- Main grid: About + Certifications -->
+      <section class="grid">
+        <div class="card" id="about">
+          <h3>About</h3>
+          <p class="muted">I’m K Suchith Kumar, a 2nd-year Computer Science & Engineering student at SR University. I love building web apps, solving algorithmic problems, and learning new tools. I'm currently focusing on JavaScript, C, algorithms, and full-stack fundamentals.</p>
+
+          <h4 style="margin-top:1rem">Skills</h4>
+          <div class="skill">
+            <div class="meta"><span>JavaScript</span><span>80%</span></div>
+            <div class="bar"><i style="width:80%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="meta"><span>HTML & CSS</span><span>85%</span></div>
+            <div class="bar"><i style="width:85%"></i></div>
+          </div>
+          <div class="skill">
+            <div class="meta"><span>C / C++</span><span>70%</span></div>
+            <div class="bar"><i style="width:70%"></i></div>
+          </div>
+
+          <h4 style="margin-top:1rem">Education</h4>
+          <p class="muted">B.Tech — Computer Science & Engineering (SR University) — 2nd Year</p>
+        </div>
+
+        <div class="card">
+          <h3>Certifications</h3>
+          <div class="cert-grid">
+            <div class="cert"><h4>Intro to Web Dev</h4><p>Provider — 2024</p></div>
+            <div class="cert"><h4>Data Structures</h4><p>Provider — 2024</p></div>
+            <div class="cert"><h4>Python Basics</h4><p>Provider — 2023</p></div>
+            <div class="cert"><h4>SQL Essentials</h4><p>Provider — 2023</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Projects -->
+      <section class="card" id="projects">
+        <h3>Projects</h3>
+        <div class="projects-grid">
+          <article class="project">
+            <h5>Lost & Found Portal</h5>
+            <p class="muted">A full-stack portal to register and track lost items — includes admin dashboard and search features.</p>
+            <div style="margin-top:.75rem"><button class="btn" data-proj="1">View more</button></div>
+          </article>
+
+          <article class="project">
+            <h5>Cinema Seat Booking (C)</h5>
+            <p class="muted">A console-based seat booking system implemented in C for practice with arrays and I/O.</p>
+            <div style="margin-top:.75rem"><button class="btn" data-proj="2">View more</button></div>
+          </article>
+
+          <article class="project">
+            <h5>Portfolio Website</h5>
+            <p class="muted">This portfolio — converted from a React/TypeScript template into plain HTML/CSS/JS.</p>
+            <div style="margin-top:.75rem"><button class="btn" data-proj="3">View more</button></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section class="card" id="contact">
+        <h3>Contact Me</h3>
+        <p class="muted">Have a project, internship, or question? Send a message and I'll reply.</p>
+        <form id="contactForm" novalidate>
+          <input type="text" id="name" placeholder="Your name" required>
+          <input type="email" id="email" placeholder="Your email" required>
+          <input type="text" id="subject" placeholder="Subject">
+          <textarea id="message" placeholder="Message" required></textarea>
+          <div class="row">
+            <button type="submit" class="btn primary">Send message</button>
+            <div class="spacer"></div>
+            <div id="formStatus" class="muted"></div>
+          </div>
+        </form>
+      </section>
+
+    </main>
+
+    <footer>
+      <div class="muted">© <span id="year"></span> Kolluri Suchith Kumar — Built with HTML, CSS & JavaScript</div>
+    </footer>
+  </div>
+
+  <script>
+    // script.js - embedded
+
+    // Dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Typing animation for roles
+    (function(){
+      const el = document.getElementById('typing');
+      const roles = ['Web Developer','Frontend Enthusiast','Problem Solver','C Programmer','Open to internships'];
+      let i=0,j=0,forward=true;
+      function step(){
+        if(!el) return;
+        const current = roles[i];
+        if(forward){
+          el.textContent = current.slice(0,j+1);
+          j++;
+          if(j>=current.length){ forward=false; setTimeout(step,900); return; }
+        } else {
+          el.textContent = current.slice(0,j-1);
+          j--;
+          if(j<=0){ forward=true; i=(i+1)%roles.length; j=0; }
+        }
+        setTimeout(step,90 + Math.random()*60);
+      }
+      step();
+    })();
+
+    // Simple project modal handler (opens an alert for demo)
+    document.querySelectorAll('[data-proj]').forEach(btn=>{
+      btn.addEventListener('click', e=>{
+        const id = btn.getAttribute('data-proj');
+        if(id==='1') alert('Lost & Found Portal:\nBuilt with HTML/CSS/JS + Node/Express (demo).');
+        if(id==='2') alert('Cinema Seat Booking (C):\nConsole C program for seat booking with 20 seats.');
+        if(id==='3') alert('Portfolio:\nThis single-file HTML/CSS/JS is a converted version of your React app.');
+      });
+    });
+
+    // Contact form validation (demo: no backend) — shows success message only
+    document.getElementById('contactForm').addEventListener('submit', function(ev){
+      ev.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const status = document.getElementById('formStatus');
+      status.textContent = '';
+      if(!name || !email || !message){ status.textContent = 'Please fill required fields.'; return; }
+      // rudimentary email check
+      if(!/^\S+@\S+\.\S+$/.test(email)){ status.textContent = 'Please enter a valid email.'; return; }
+      status.textContent = 'Thanks! Your message was recorded (demo).';
+      this.reset();
+    });
+
+  </script>
+</body>
+</html>
